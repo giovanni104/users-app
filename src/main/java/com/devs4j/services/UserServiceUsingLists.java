@@ -15,7 +15,7 @@ import com.devs4j.models.User;
 import com.github.javafaker.Faker;
 
 @Service
-public class UserService {
+public class UserServiceUsingLists {
 	@Autowired
 	private Faker faker;
 	private List<User> users = new ArrayList<>();

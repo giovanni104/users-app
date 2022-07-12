@@ -16,24 +16,36 @@ public class RoleService {
 
 	@Autowired
 	private RoleRepository repository;
-	
-	public List<Role> getRoles(){		
+
+	public List<Role> getRoles() {
 		return repository.findAll();
 	}
-	
+
 	public Role createRole(Role role) {
 		return repository.save(role);
 	}
-	
-	public Role updateRole(Integer roleId,Role role) {
+
+	public Role updateRole(Integer roleId, Role role) {
 
 		Optional<Role> result = repository.findById(roleId);
-		
-		if(result.isPresent()) {
+
+		if (result.isPresent()) {
 			return repository.save(role);
-		}else {
-			
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role id %s not exist ", roleId));
+		} else {
+
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role id %s not exist ", roleId));
 		}
+	}
+
+	public void deleteRole(Integer roleId) {
+		Optional<Role> result = repository.findById(roleId);
+
+		if (result.isPresent()) {
+			repository.delete(result.get());
+		} else {
+
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Role id %s not exist ", roleId));
+		}
+
 	}
 }
